@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Weather - AgroBrains</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">🌾 AgroBrains</div>
+
+    <div class="hamburger" id="hamburger">☰</div>
+
+    <ul id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="crops.html">Crop Advisor</a></li>
+        <li><a href="weather.html">Weather</a></li>
+        <li><a href="market.html">Market</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+</nav>
+
+<section class="weather-page">
+
+    <h2>🌦 Live Weather</h2>
+
+    <div class="weather-box">
+
+        <input type="text" id="city" placeholder="Enter City Name">
+
+        <button onclick="getWeather()">Check Weather</button>
+
+        <div id="weather-result"></div>
+
+    </div>
+
+</section>
+
+<script src="script.js"></script>
+
+</body>
+</html>

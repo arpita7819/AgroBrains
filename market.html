@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AgroBrains - Market Prices</title>
+
+<link rel="stylesheet" href="style.css">
+
+<!-- Chart.js Library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<h1>🌾 AgroBrains Market Prices</h1>
+
+<!-- State Selector -->
+
+<label for="state">Select State:</label>
+
+<select id="state" onchange="loadMarketPrices()">
+
+<option value="">All States</option>
+<option value="Haryana">Haryana</option>
+<option value="Punjab">Punjab</option>
+<option value="Uttar Pradesh">Uttar Pradesh</option>
+<option value="Rajasthan">Rajasthan</option>
+
+</select>
+
+<br><br>
+
+<label for="district">Select District:</label>
+
+<select id="district" onchange="loadMarketPrices()">
+
+<option value="">All Districts</option>
+
+<option value="Karnal">Karnal</option>
+<option value="Kurukshetra">Kurukshetra</option>
+<option value="Hisar">Hisar</option>
+<option value="Panipat">Panipat</option>
+<option value="Sirsa">Sirsa</option>
+
+</select>
+
+
+<br><br>
+
+
+<!-- Market Price Table -->
+
+<table border="1" cellpadding="10">
+
+<tr>
+<th>Crop</th>
+<th>Price (₹/Quintal)</th>
+</tr>
+
+<tr>
+<td>🌾 Wheat</td>
+<td id="wheat">--</td>
+</tr>
+
+<tr>
+<td>🍚 Rice</td>
+<td id="rice">--</td>
+</tr>
+
+<tr>
+<td>🌿 Cotton</td>
+<td id="cotton">--</td>
+</tr>
+
+<tr>
+<td>🌽 Maize</td>
+<td id="maize">--</td>
+</tr>
+
+</table>
+
+
+<br>
+
+<p id="update-time"></p>
+
+
+<hr>
+
+
+<!-- Price Chart -->
+
+<h2>📊 Crop Price Chart</h2>
+
+<canvas id="priceChart" width="600" height="300"></canvas>
+
+
+<!-- JavaScript File -->
+
+<script src="script.js"></script>
+
+</body>
+</html>

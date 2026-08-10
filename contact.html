@@ -1,70 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>AgroBrains - Contact</title>
-
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgroBrains - Contact</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<!-- NAVBAR -->
-
 <nav>
-    <div class="logo">🌾 AgroBrains</div>
-
-    <div class="hamburger" id="hamburger">
-        ☰
-    </div>
-
-    <ul id="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="crops.html">Crop Advisor</a></li>
-        <li><a href="weather.html">Weather</a></li>
-        <li><a href="market.html">Market</a></li>
-        <li><a href="contact.html">Contact</a></li>
-    </ul>
+  <a href="index.html" class="logo">🌾 AgroBrains</a>
+  <button class="hamburger" id="hamburger" aria-label="Menu">☰</button>
+  <ul id="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="crops.html">Crop Advisor</a></li>
+    <li><a href="weather.html">Weather</a></li>
+    <li><a href="market.html">Market</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
 </nav>
 
+<main class="page-wrapper">
+  <h2 class="section-title" style="text-align:center">📞 Contact Us</h2>
+  <p class="section-sub" style="text-align:center">Have questions or suggestions? We'd love to hear from you!</p>
 
-<!-- CONTACT SECTION -->
-
-<section class="contact" style="margin-top:100px;">
-
-<h2>📞 Contact Us</h2>
-
-<p>Have questions or suggestions? We'd love to hear from you!</p>
-
-<form onsubmit="submitForm(event)">
-
-<input type="text" id="name" placeholder="Your Name" required>
-
-<input type="email" id="email" placeholder="Your Email" required>
-
-<textarea id="message" placeholder="Your Message" required></textarea>
-
-<button type="submit">Send Message</button>
-
-</form>
-
-<br>
-
-<p id="form-msg"></p>
-
-</section>
-
-
-<!-- FOOTER -->
+  <div class="form-card">
+    <form onsubmit="submitForm(event)">
+      <div class="form-group">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" placeholder="e.g. Arpita Kamboj" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Your Email</label>
+        <input type="email" id="email" placeholder="e.g. arpita@email.com" required>
+      </div>
+      <div class="form-group">
+        <label for="message">Your Message</label>
+        <textarea id="message" placeholder="Type your message here..." required></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Send Message</button>
+    </form>
+    <div id="form-msg"></div>
+  </div>
+</main>
 
 <footer>
-<p>© 2026 AgroBrains | Developed by Arpita & AgroBrains Team</p>
+  <p>© 2026 <span>AgroBrains</span> | Developed by Arpita Kamboj</p>
 </footer>
 
-
 <script src="script.js"></script>
-
 </body>
 </html>

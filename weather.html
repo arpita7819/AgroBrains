@@ -1,44 +1,433 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>Weather - AgroBrains</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AgroBrains - Weather</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* ===============================
+           WEATHER PAGE
+        =============================== */
+
+        .weather-page {
+            min-height: 75vh;
+            padding-bottom: 60px;
+        }
+
+        .weather-card {
+            max-width: 850px;
+            margin: 30px auto;
+        }
+.weather-search {
+    display: flex;
+    gap: 15px;
+    align-items: flex-end;
+    width: 100%;
+}
+
+.weather-search .form-group {
+    flex: 1 1 auto;
+    width: 100%;
+    min-width: 0;
+    margin-bottom: 0;
+}
+
+.weather-search .form-group input {
+    display: block;
+    width: 100% !important;
+    min-width: 0;
+    box-sizing: border-box;
+    height: 52px;
+}
+
+.weather-search button {
+    flex: 0 0 240px;
+    height: 52px;
+    white-space: nowrap;
+}
+
+@media (max-width: 750px) {
+
+    .weather-search {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .weather-search .form-group {
+        width: 100%;
+    }
+
+    .weather-search .form-group input {
+        width: 100% !important;
+    }
+
+    .weather-search button {
+        width: 100%;
+        flex: none;
+    }
+}
+
+        /* ===============================
+           WEATHER OPTIONS
+        =============================== */
+
+        .weather-options {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .weather-option-btn {
+            border: none;
+            padding: 12px 22px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            background: #e8f5e9;
+            color: #2e7d32;
+            transition: 0.25s;
+        }
+
+        .weather-option-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .weather-option-btn.active {
+            background: #2e7d32;
+            color: white;
+        }
+
+        /* ===============================
+           CURRENT WEATHER
+        =============================== */
+
+        #weather-result {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .current-weather-card {
+            padding: 25px;
+            border-radius: 18px;
+            background: rgba(255,255,255,0.85);
+        }
+
+        .current-weather-card img {
+            width: 90px;
+            height: 90px;
+        }
+
+        .current-weather-card h2 {
+            margin: 5px 0 15px;
+        }
+
+        .weather-info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .weather-info-box {
+            padding: 15px;
+            border-radius: 12px;
+            background: #f5f9f5;
+        }
+
+        .weather-info-box strong {
+            display: block;
+            font-size: 18px;
+            margin-top: 5px;
+        }
+
+        /* ===============================
+           5 DAY FORECAST
+        =============================== */
+
+        #forecast-result {
+            margin-top: 30px;
+        }
+
+        .forecast-title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .forecast-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+        }
+
+        .forecast-card {
+            padding: 18px 12px;
+            border-radius: 16px;
+            background: white;
+            text-align: center;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+            transition: 0.25s;
+        }
+
+        .forecast-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .forecast-day {
+            font-weight: 700;
+            color: #2e7d32;
+            margin-bottom: 5px;
+        }
+
+        .forecast-date {
+            font-size: 12px;
+            color: #777;
+        }
+
+        .forecast-icon {
+            width: 65px;
+            height: 65px;
+            margin: 8px auto;
+        }
+
+        .forecast-temp {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .forecast-condition {
+            font-size: 13px;
+            margin: 8px 0;
+            text-transform: capitalize;
+        }
+
+        .forecast-details {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        .forecast-loading {
+            text-align: center;
+            padding: 25px;
+        }
+
+        /* ===============================
+           RESPONSIVE
+        =============================== */
+
+       @media (max-width: 750px) {
+
+    .weather-search {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .weather-search .form-group {
+        width: 100%;
+    }
+
+    .weather-search .form-group input {
+        width: 100% !important;
+    }
+
+    .weather-search button {
+        width: 100%;
+        flex: none;
+    }
+
+}
+
+        @media (max-width: 450px) {
+
+            .forecast-container {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-<nav>
-    <div class="logo">🌾 AgroBrains</div>
+    <!-- ===============================
+         NAVIGATION
+    =============================== -->
 
-    <div class="hamburger" id="hamburger">☰</div>
+    <nav>
 
-    <ul id="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="crops.html">Crop Advisor</a></li>
-        <li><a href="weather.html">Weather</a></li>
-        <li><a href="market.html">Market</a></li>
-        <li><a href="contact.html">Contact</a></li>
-    </ul>
-</nav>
+        <a href="index.html" class="logo">
+            🌾 AgroBrains
+        </a>
 
-<section class="weather-page">
+        <button
+            class="hamburger"
+            id="hamburger"
+            aria-label="Menu">
+            ☰
+        </button>
 
-    <h2>🌦 Live Weather</h2>
+        <ul id="nav-links">
 
-    <div class="weather-box">
+            <li>
+                <a href="index.html">
+                    Home
+                </a>
+            </li>
 
-        <input type="text" id="city" placeholder="Enter City Name">
+            <li>
+                <a href="crops.html">
+                    Crop Advisor
+                </a>
+            </li>
 
-        <button onclick="getWeather()">Check Weather</button>
+            <li>
+                <a href="weather.html">
+                    Weather
+                </a>
+            </li>
 
-        <div id="weather-result"></div>
+            <li>
+                <a href="market.html">
+                    Market
+                </a>
+            </li>
 
-    </div>
+            <li>
+                <a href="contact.html">
+                    Contact
+                </a>
+            </li>
 
-</section>
+        </ul>
 
-<script src="script.js"></script>
+    </nav>
+
+
+    <!-- ===============================
+         WEATHER MAIN
+    =============================== -->
+
+    <main class="page-wrapper weather-page">
+
+        <h2 class="section-title">
+            🌦 Weather Forecast
+        </h2>
+
+        <p class="section-sub">
+            Check current weather conditions and plan ahead with a 5-day forecast.
+        </p>
+
+
+        <!-- SEARCH CARD -->
+
+        <div class="form-card weather-card">
+
+            <div class="weather-search">
+
+                <div class="form-group">
+
+                    <label for="city">
+                        City Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="city"
+                        placeholder="e.g. Delhi, Mumbai, Chandigarh"
+                        autocomplete="off"
+                    >
+
+                </div>
+
+
+                <button
+                    class="submit-btn"
+                    onclick="getWeather()">
+
+                    🌤 Check Weather
+
+                </button>
+
+            </div>
+
+
+            <!-- WEATHER OPTIONS -->
+
+            <div class="weather-options">
+
+                <button
+                    id="current-weather-btn"
+                    class="weather-option-btn active"
+                    onclick="showCurrentWeather()">
+
+                    🌤 Current Weather
+
+                </button>
+
+
+                <button
+                    id="forecast-btn"
+                    class="weather-option-btn"
+                    onclick="getForecast()">
+
+                    📅 5-Day Forecast
+
+                </button>
+
+            </div>
+
+
+            <!-- CURRENT WEATHER -->
+
+            <div id="weather-result"></div>
+
+
+            <!-- 5 DAY FORECAST -->
+
+            <div
+                id="forecast-result"
+                style="display:none;">
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- ===============================
+         FOOTER
+    =============================== -->
+
+    <footer>
+
+        <p>
+            © 2026
+            <span>AgroBrains</span>
+            | Developed by Arpita Kamboj
+        </p>
+
+    </footer>
+
+
+    <!-- ===============================
+         SCRIPT
+    =============================== -->
+
+    <script src="script.js"></script>
 
 </body>
+
 </html>

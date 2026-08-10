@@ -12,7 +12,7 @@ The project combines frontend web technologies with public APIs and interactive 
 Add your GitHub Pages link here
 
 🔗 **GitHub Repository:**  
-Add your GitHub repository link here
+https://github.com/arpita7819/AgroBrains
 
 ---
 

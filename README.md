@@ -1,29 +1,70 @@
-# 🌾 AgroBrains - Smart Agriculture Platform
+# 🌾 AgroBrains – Smart Agriculture Platform
 
-AgroBrains is a web-based platform that helps farmers with smart agricultural insights.
+AgroBrains is a web-based smart agriculture platform designed to provide farmers and agriculture enthusiasts with useful information about crops, weather conditions, and mandi prices through a simple and responsive interface.
 
-## 🚀 Features
-
-- 🌱 Crop Recommendation System
-- 🌦 Live Weather Updates (API)
-- 💰 Real-time Mandi Prices (Government API)
-- 📊 Price Visualization (Chart.js)
-- 📍 State & District Filtering
-- 📱 Responsive UI Design
-
-## 🛠 Technologies Used
-
-- HTML
-- CSS
-- JavaScript
-- APIs (OpenWeather, Data.gov.in)
-
-## 📌 Future Scope
-
-- Login system
-- AI-based crop prediction
-- Location-based services
+The project combines frontend web technologies with public APIs and interactive data visualization to create a practical agriculture-focused platform.
 
 ---
 
-👩‍💻 Developed by Arpita
+## 🚀 Live Demo
+
+🔗 **Live Website:**  
+Add your GitHub Pages link here
+
+🔗 **GitHub Repository:**  
+Add your GitHub repository link here
+
+---
+
+## 📌 Features
+
+### 🌱 Crop Advisor
+
+Helps users get crop recommendations based on:
+
+- Soil type
+- Season
+- Available agricultural conditions
+
+The recommendation system provides suitable crop suggestions through an easy-to-use interface.
+
+---
+
+### 🌤️ Weather Information
+
+The Weather module provides both current weather information and a 5-day forecast.
+
+#### Current Weather
+
+Users can search for a city and view:
+
+- 🌡️ Temperature
+- 💧 Humidity
+- 💨 Wind speed
+- ☁️ Weather condition
+- 🌦️ Weather icon
+
+#### 5-Day Forecast
+
+Users can switch to a 5-day forecast and view:
+
+- Maximum temperature
+- Minimum temperature
+- Weather condition
+- Humidity
+- Rain probability
+- Wind speed
+
+Weather data is retrieved using the OpenWeather API.
+
+---
+
+### 💰 Mandi Prices
+
+The Market section provides agricultural market price information.
+
+Users can select:
+
+```text
+State → District → Mandi → Commodity
+

@@ -1,107 +1,566 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AgroBrains - Market Prices</title>
+  <meta charset="UTF-8">
 
-<link rel="stylesheet" href="style.css">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-<!-- Chart.js Library -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <title>AgroBrains - Market Prices</title>
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
+  <!-- Chart.js -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/chart.js"
+  ></script>
 
 </head>
 
+
 <body>
 
-<h1>🌾 AgroBrains Market Prices</h1>
 
-<!-- State Selector -->
+  <!-- ===============================
+       NAVBAR
+  ================================ -->
 
-<label for="state">Select State:</label>
+  <nav>
 
-<select id="state" onchange="loadMarketPrices()">
-
-<option value="">All States</option>
-<option value="Haryana">Haryana</option>
-<option value="Punjab">Punjab</option>
-<option value="Uttar Pradesh">Uttar Pradesh</option>
-<option value="Rajasthan">Rajasthan</option>
-
-</select>
-
-<br><br>
-
-<label for="district">Select District:</label>
-
-<select id="district" onchange="loadMarketPrices()">
-
-<option value="">All Districts</option>
-
-<option value="Karnal">Karnal</option>
-<option value="Kurukshetra">Kurukshetra</option>
-<option value="Hisar">Hisar</option>
-<option value="Panipat">Panipat</option>
-<option value="Sirsa">Sirsa</option>
-
-</select>
+    <a
+      href="index.html"
+      class="logo"
+    >
+      🌾 AgroBrains
+    </a>
 
 
-<br><br>
+    <button
+      class="hamburger"
+      id="hamburger"
+      aria-label="Menu"
+    >
+      ☰
+    </button>
 
 
-<!-- Market Price Table -->
+    <ul id="nav-links">
 
-<table border="1" cellpadding="10">
+      <li>
+        <a href="index.html">
+          Home
+        </a>
+      </li>
 
-<tr>
-<th>Crop</th>
-<th>Price (₹/Quintal)</th>
-</tr>
+      <li>
+        <a href="crops.html">
+          Crop Advisor
+        </a>
+      </li>
 
-<tr>
-<td>🌾 Wheat</td>
-<td id="wheat">--</td>
-</tr>
+      <li>
+        <a href="weather.html">
+          Weather
+        </a>
+      </li>
 
-<tr>
-<td>🍚 Rice</td>
-<td id="rice">--</td>
-</tr>
+      <li>
+        <a
+          href="market.html"
+          class="active"
+        >
+          Market
+        </a>
+      </li>
 
-<tr>
-<td>🌿 Cotton</td>
-<td id="cotton">--</td>
-</tr>
+      <li>
+        <a href="contact.html">
+          Contact
+        </a>
+      </li>
 
-<tr>
-<td>🌽 Maize</td>
-<td id="maize">--</td>
-</tr>
+    </ul>
 
-</table>
-
-
-<br>
-
-<p id="update-time"></p>
-
-
-<hr>
-
-
-<!-- Price Chart -->
-
-<h2>📊 Crop Price Chart</h2>
-
-<canvas id="priceChart" width="600" height="300"></canvas>
+  </nav>
 
 
-<!-- JavaScript File -->
 
-<script src="script.js"></script>
+  <!-- ===============================
+       MAIN
+  ================================ -->
+
+  <main class="page-wrapper">
+
+
+    <h2
+      class="section-title"
+      style="text-align:center"
+    >
+      💰 Market Prices
+    </h2>
+
+
+    <p
+      class="section-sub"
+      style="text-align:center"
+    >
+      Live mandi prices from government data
+    </p>
+
+
+
+    <!-- ===============================
+         MARKET SECTION
+    ================================ -->
+
+    <div class="market-page">
+
+
+      <!-- ===============================
+           FILTERS
+      ================================ -->
+
+      <div class="market-filters">
+
+
+        <!-- STATE -->
+
+        <div class="form-group">
+
+          <label for="state">
+            State / UT
+          </label>
+
+          <select id="state">
+
+            <option value="">
+              Select State / UT
+            </option>
+
+          </select>
+
+        </div>
+
+
+
+        <!-- DISTRICT -->
+
+        <div class="form-group">
+
+          <label for="district">
+            District
+          </label>
+
+          <select
+            id="district"
+            disabled
+          >
+
+            <option value="">
+              Select District
+            </option>
+
+          </select>
+
+        </div>
+
+
+
+        <!-- MANDI -->
+
+        <div class="form-group">
+
+          <label for="market">
+            Mandi / Market
+          </label>
+
+          <select
+            id="market"
+            disabled
+          >
+
+            <option value="">
+              Select Mandi
+            </option>
+
+          </select>
+
+        </div>
+
+
+
+        <!-- COMMODITY -->
+
+        <div class="form-group">
+
+          <label for="commodity">
+            Commodity
+          </label>
+
+          <select
+            id="commodity"
+            disabled
+          >
+
+            <option value="">
+              Select Commodity
+            </option>
+
+          </select>
+
+        </div>
+
+
+      </div>
+
+
+
+      <!-- ===============================
+           STATUS
+      ================================ -->
+
+      <div
+        id="market-status"
+        class="market-status"
+      >
+        Select a state to begin.
+      </div>
+
+
+
+      <!-- ===============================
+           BUTTONS
+      ================================ -->
+
+      <div
+        class="market-actions"
+        style="
+          display:flex;
+          gap:12px;
+          flex-wrap:wrap;
+          margin:20px 0;
+        "
+      >
+
+        <button
+          id="market-search-btn"
+          class="btn"
+          onclick="loadMarketPrices()"
+          disabled
+        >
+          🔍 Get Price
+        </button>
+
+
+        <button
+          id="compare-btn"
+          class="btn"
+          onclick="compareMajorCrops()"
+          disabled
+        >
+          📊 Compare Major Crops
+        </button>
+
+      </div>
+
+
+
+      <!-- ===============================
+           SELECTED CROP PRICE CARD
+      ================================ -->
+
+      <div
+        class="market-price-card"
+        style="
+          margin:20px 0;
+          padding:20px;
+          border-radius:12px;
+          background:#f7faf7;
+        "
+      >
+
+        <h3>
+          🌾 Selected Crop
+        </h3>
+
+
+        <h2
+          id="selected-commodity"
+        >
+          —
+        </h2>
+
+
+        <div
+          style="
+            display:grid;
+            grid-template-columns:
+              repeat(auto-fit,minmax(140px,1fr));
+            gap:15px;
+            margin-top:15px;
+          "
+        >
+
+          <div>
+
+            <small>
+              Minimum Price
+            </small>
+
+            <div
+              id="selected-min"
+              class="price-val"
+            >
+              —
+            </div>
+
+          </div>
+
+
+          <div>
+
+            <small>
+              Maximum Price
+            </small>
+
+            <div
+              id="selected-max"
+              class="price-val"
+            >
+              —
+            </div>
+
+          </div>
+
+
+          <div>
+
+            <small>
+              Modal Price
+            </small>
+
+            <div
+              id="selected-modal"
+              class="price-val"
+            >
+              —
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ===============================
+           PRICE TABLE
+      ================================ -->
+
+      <div class="market-table-wrap">
+
+        <h3>
+          📋 Market Price Details
+        </h3>
+
+
+        <table class="market-table">
+
+          <thead>
+
+            <tr>
+
+              <th>
+                Commodity
+              </th>
+
+              <th>
+                Variety
+              </th>
+
+              <th>
+                Market
+              </th>
+
+              <th>
+                Min Price
+              </th>
+
+              <th>
+                Max Price
+              </th>
+
+              <th>
+                Modal Price
+              </th>
+
+              <th>
+                Date
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody id="market-body">
+
+            <tr>
+
+              <td
+                colspan="7"
+                style="text-align:center"
+              >
+                Select a commodity and
+                click "Get Price".
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+
+
+      <!-- ===============================
+           UPDATE TIME
+      ================================ -->
+
+      <p
+        id="update-time"
+        style="text-align:center"
+      >
+      </p>
+
+
+
+      <!-- ===============================
+           PRICE CHART
+      ================================ -->
+
+      <div
+        class="chart-wrap"
+        style="
+          margin-top:30px;
+          min-height:400px;
+        "
+      >
+
+        <h3>
+          📊 Major Crop Price Comparison
+        </h3>
+
+
+        <p
+          class="section-sub"
+        >
+          Compare modal prices of major
+          crops available in the selected mandi.
+        </p>
+
+
+        <div
+          style="
+            position:relative;
+            height:350px;
+            width:100%;
+          "
+        >
+
+          <canvas
+            id="priceChart"
+          ></canvas>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ===============================
+           INFORMATION
+      ================================ -->
+
+      <div
+        class="market-info"
+        style="
+          margin-top:30px;
+          padding:20px;
+          border-radius:12px;
+          background:#f5f8f5;
+        "
+      >
+
+        <h3>
+          ℹ️ About Mandi Prices
+        </h3>
+
+
+        <p>
+          Prices shown here are retrieved
+          from government agricultural
+          market data.
+        </p>
+
+
+        <p>
+          Select a State, District,
+          Mandi and Commodity to view
+          available price records.
+        </p>
+
+
+        <p>
+          ⭐ Major crops are automatically
+          identified from the commodities
+          reported by the selected mandi.
+        </p>
+
+      </div>
+
+
+    </div>
+
+  </main>
+
+
+
+  <!-- ===============================
+       FOOTER
+  ================================ -->
+
+  <footer>
+
+    <p>
+      © 2026
+      <span>AgroBrains</span>
+      | Developed by Arpita Kamboj
+    </p>
+
+  </footer>
+
+
+
+  <!-- ===============================
+       SCRIPT
+  ================================ -->
+
+  <script src="script.js"></script>
+
 
 </body>
+
 </html>
+```
